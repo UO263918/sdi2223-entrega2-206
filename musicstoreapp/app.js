@@ -29,6 +29,14 @@ const { MongoClient } = require("mongodb");
 const url = 'mongodb+srv://admin:sdi@eii-sdi-cluster.7uvnfo7.mongodb.net/?retryWrites=true&w=majority';
 app.set('connectionStrings', url);
 
+//PARTE ENRUTADOR
+const userSessionRouter = require('./routes/userSessionRouter');
+const userAudiosRouter = require('./routes/userAudiosRouter');
+app.use("/songs/add",userSessionRouter);
+app.use("/publications",userSessionRouter);
+app.use("/audios/",userAudiosRouter);
+app.use("/shop/",userSessionRouter)
+
 //PARTE SONGS
 let songsRepository = require("./repositories/songsRepository.js");
 songsRepository.init(app, MongoClient);
